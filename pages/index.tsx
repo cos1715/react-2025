@@ -1,14 +1,24 @@
-import { useAuth } from '../lib/auth';
+import Head from 'next/Head';
+import { Heading, Text, Code, Button } from '@chakra-ui/core';
+import { useAuth } from '@/lib/auth';
 
 export default function Index() {
   const auth = useAuth();
 
   return auth.user ? (
     <div>
-      <p>Email: {auth.user.email}</p>
-      <button onClick={(e) => auth.signOut()}>Sign Out</button>
+      <Head>
+        <title>React 2025</title>
+      </Head>
+      <Heading>Fast Feedback</Heading>
+      <Text>
+        Email: <Code>{auth.user.email}</Code>
+      </Text>
+      <Button onClick={(e) => auth.signOut()} variantColor="green">
+        Sign Out
+      </Button>
     </div>
   ) : (
-    <button onClick={(e) => auth.signInWithGitHub()}>Sign In</button>
+    <Button onClick={(e) => auth.signInWithGitHub()}>Sign In</Button>
   );
 }
