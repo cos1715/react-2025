@@ -5,9 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "fix-formatting": "prettier --write \"**/*.{js,json,md,jsx,ts,tsx,scss}\""
   },
   "dependencies": {
+    "firebase": "^7.19.1",
+    "js-cookie": "^2.2.1",
+    "prettier": "^2.1.1",
     "next": "9.5.2",
     "react": "16.13.1",
     "react-dom": "16.13.1"
