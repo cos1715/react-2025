@@ -6,9 +6,9 @@ export default function Index() {
   return auth.user ? (
     <div>
       <p>Email: {auth.user.email}</p>
-      <button onClick={(e) => auth.signout()}>Sign Out</button>
+      <button onClick={(e) => auth.signOut()}>Sign Out</button>
     </div>
   ) : (
-    <button onClick={(e) => auth.signinWithGitHub()}>Sign In</button>
+    <button onClick={(e) => auth.signInWithGitHub()}>Sign In</button>
   );
 }
