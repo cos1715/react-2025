@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import firebase from './firebase';
+import { createUser } from './db';
 
 interface IAuth {
   user: IFormatUser | null;
@@ -21,7 +22,8 @@ interface IFormatUser {
   uid: string;
   email: string;
   name: string;
-  provider: IProvider;
+  provider: string;
+  // provider: IProvider;
 }
 
 const authContext = createContext<IAuth>(undefined);
@@ -41,6 +43,7 @@ function useProvideAuth(): IAuth {
     if (rawUser) {
       console.log('rawUser==>>', rawUser);
       const user = formatUser(rawUser);
+      createUser(user.uid, user);
       setLoading(false);
       setUser(user);
 
@@ -92,4 +95,5 @@ const formatUser = (user) => ({
   email: user.email,
   name: user.displayName,
   provider: user.providerData[0].providerId,
+  photoURL: user.photoURL,
 });

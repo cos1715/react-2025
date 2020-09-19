@@ -1,7 +1,7 @@
-import * as firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/functions'
-import 'firebase/firestore'
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/functions';
+import 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -13,8 +13,17 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-if (!firebase.app.length) {
+if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-export default firebase
+// !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
+// try {
+//   firebase.initializeApp(firebaseConfig);
+// } catch (err) {
+//   if (!/already exists/.test(err.message)) {
+//     console.error('Firebase initialization error', err.stack);
+//   }
+// }
+
+export default firebase;
