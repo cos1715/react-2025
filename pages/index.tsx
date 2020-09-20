@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { Heading, Text, Code, Button } from '@chakra-ui/core';
+import { Icon } from '@chakra-ui/core';
 import { useAuth } from '@/lib/auth';
 
 export default function Index() {
@@ -7,6 +8,7 @@ export default function Index() {
 
   return auth.user ? (
     <div>
+      <Icon name="logo" color="red.500" />
       <Head>
         <title>React 2025</title>
       </Head>
