@@ -14,7 +14,7 @@ export default function Index() {
       <Text>
         Email: <Code>{auth.user.email}</Code>
       </Text>
-      <Button onClick={(e) => auth.signOut()} variantColor="green">
+      <Button onClick={(e) => auth.signOut()} variantColor="red">
         Sign Out
       </Button>
     </div>
