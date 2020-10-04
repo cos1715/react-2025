@@ -1,16 +1,12 @@
-import Head from 'next/head';
 import { Heading, Text, Code, Button, Box, Flex } from '@chakra-ui/core';
-import { Icon } from '@chakra-ui/core';
 import { useAuth } from '@/lib/auth';
+import { Icon } from '@chakra-ui/core';
 
 export default function Index() {
   const auth = useAuth();
 
   return (
     <>
-      <Head>
-        <title>React 2025</title>
-      </Head>
       <Flex
         as="main"
         direction="column"
