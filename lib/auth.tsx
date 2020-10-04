@@ -23,6 +23,7 @@ interface IFormatUser {
   email: string;
   name: string;
   provider: string;
+  photoURL: string;
   // provider: IProvider;
 }
 
