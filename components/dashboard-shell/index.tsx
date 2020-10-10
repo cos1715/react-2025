@@ -10,7 +10,9 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Heading,
+  Button,
 } from '@chakra-ui/core';
+import { AddSiteModal } from '../add-site-modal';
 
 interface IProps {
   children: ReactNode;
@@ -34,8 +36,13 @@ export const DashBoardShell: React.FC<IProps> = ({ children }) => {
           <Link>Sites</Link>
         </Stack>
         <Flex alignItems="center">
-          <Link mr={4}>Account</Link>
-          <Avatar size="sm" src={auth.user.photoURL} />
+          {/* <Link mr={4}>Account</Link> */}
+          {auth.user && (
+            <Button variant="ghost" mr={4} onClick={auth.signOut}>
+              Log Out
+            </Button>
+          )}
+          <Avatar size="sm" src={auth.user?.photoURL} />
         </Flex>
       </Flex>
       <Flex backgroundColor="gray.200" p={8} height="100vh">
@@ -55,6 +62,12 @@ export const DashBoardShell: React.FC<IProps> = ({ children }) => {
             </BreadcrumbItem>
           </Breadcrumb>
           <Heading mb={4}>Sites</Heading>
+          <Flex justifyContent="space-between">
+            <Heading mb={8}>My Sites</Heading>
+            <AddSiteModal
+              buttonProps={{ text: '+ Add Site', variantColor: 'teal' }}
+            />
+          </Flex>
           {children}
         </Flex>
       </Flex>

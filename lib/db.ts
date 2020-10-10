@@ -9,9 +9,12 @@ export const createUser = (uid, data) => {
     .set({ uid, ...data }, { merge: true });
 };
 
-export const createSite = (data) => {
-  fireStore.collection('sites').add(data);
-};
+export function createSite(data) {
+  const site = fireStore.collection('sites').doc();
+  site.set(data);
+
+  return site;
+}
 
 export function createFeedback(data) {
   return fireStore.collection('feedback').add(data);

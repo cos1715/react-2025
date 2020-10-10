@@ -1,6 +1,9 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { ReactNode } from 'react';
+import useSWR, { mutate } from 'swr';
+import { Controller, useForm } from 'react-hook-form';
 import { createSite } from '@/lib/db';
+import { useAuth } from '@/lib/auth';
+import { fetcher } from '@/utils/fetcher';
 import {
   useDisclosure,
   Button,
@@ -14,20 +17,72 @@ import {
   FormLabel,
   Input,
   ModalFooter,
+  useToast,
 } from '@chakra-ui/core';
 
-export const AddSiteModal = () => {
+interface IProps {
+  children?: ReactNode;
+  buttonProps?: {
+    variantColor?: string;
+    text?: string;
+  };
+}
+
+export const AddSiteModal: React.FC<IProps> = (props) => {
+  // const { data } = useSWR('/api/sites', fetcher);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { handleSubmit, register, errors, formState } = useForm();
+  const { handleSubmit, register, errors, formState, control } = useForm({
+    mode: 'onBlur',
+  });
+  const toast = useToast();
+  const auth = useAuth();
   const onSubmit = async (values) => {
-    await createSite(values);
-    onClose();
+    const newSite = {
+      authorId: auth.user.uid,
+      createdAt: new Date().toISOString(),
+      ...values,
+    };
+    try {
+      const { id } = await createSite(newSite);
+      mutate(
+        '/api/sites',
+        async (data) => {
+          console.log('mutate==>>', data);
+
+          return {
+            sites: [{ id, ...newSite }, ...data.sites],
+            total: data.sites.length + 1,
+          };
+        },
+        false,
+      );
+      onClose();
+      toast({
+        title: 'Success',
+        description: "We've added your site",
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch {
+      toast({
+        title: 'Something went wrong',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
     <>
-      <Button onClick={onOpen} maxW="200px" fontWeight="medium">
-        Add your first site
+      <Button
+        onClick={onOpen}
+        maxW="200px"
+        fontWeight="medium"
+        variantColor={props.buttonProps.variantColor}
+      >
+        {props.buttonProps.text || 'Add your first site'}
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -61,8 +116,8 @@ export const AddSiteModal = () => {
                 Cancel
               </Button>
               <Button
-                type="submit"
                 isDisabled={!formState.isValid}
+                type="submit"
                 variantColor="teal"
               >
                 Save
