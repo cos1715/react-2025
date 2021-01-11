@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
+import cookies from 'js-cookie';
 import firebase from './firebase';
 import { createUser } from './db';
+import { IUser } from '@/models';
 
 interface IAuth {
-  user: IFormatUser | null;
+  user: IUser | null;
   loading: boolean;
   signInWithGitHub: (redirect?: string) => void;
+  signInWithGoogle: (redirect?: string) => void;
   signOut: () => void;
 }
 
@@ -16,15 +19,6 @@ interface IProvider {
   photoURL: string;
   providerId: string;
   uid: string;
-}
-
-interface IFormatUser {
-  uid: string;
-  email: string;
-  name: string;
-  provider: string;
-  photoURL: string;
-  // provider: IProvider;
 }
 
 const authContext = createContext<IAuth>(undefined);
@@ -44,7 +38,9 @@ function useProvideAuth(): IAuth {
     if (rawUser) {
       console.log('rawUser==>>', rawUser);
       const user = formatUser(rawUser);
-      createUser(user.uid, user);
+      const { token, ...userData } = user;
+      cookies.set('auth-token', token, { expires: 1 });
+      createUser(user.uid, userData);
       setLoading(false);
       setUser(user);
 
@@ -52,9 +48,24 @@ function useProvideAuth(): IAuth {
     } else {
       setLoading(false);
       setUser(false);
-
+      cookies.remove('auth-token');
       return false;
     }
+  };
+  const signInWithGoogle = (redirect) => {
+    setLoading(true);
+
+    return firebase
+      .auth()
+      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .then((response) => {
+        handleUser(response.user);
+        console.log('redirect==>>', redirect);
+
+        // if (redirect) {
+        //   Router.push(redirect);
+        // }
+      });
   };
   const signInWithGitHub = (redirect) => {
     setLoading(true);
@@ -87,6 +98,7 @@ function useProvideAuth(): IAuth {
     user,
     loading,
     signInWithGitHub,
+    signInWithGoogle,
     signOut,
   };
 }
@@ -97,4 +109,5 @@ const formatUser = (user) => ({
   name: user.displayName,
   provider: user.providerData[0].providerId,
   photoURL: user.photoURL,
+  token: user.xa,
 });

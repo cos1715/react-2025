@@ -1,15 +1,17 @@
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import cookies from 'js-cookie';
 import { useAuth } from '@/lib/auth';
 import { Heading, Text, Code, Button, Icon, Flex } from '@chakra-ui/core';
-import { useEffect } from 'react';
 
 export default function Index() {
   const auth = useAuth();
   const router = useRouter();
-  // router.push('/dashboard')
 
   useEffect(() => {
-    router.push('/dashboard');
+    if (document.cookie && cookies.get('auth-token')) {
+      router.push('/dashboard');
+    }
   }, []);
 
   return (
@@ -35,7 +37,7 @@ export default function Index() {
           </>
         ) : (
           <Button
-            onClick={(e) => auth.signInWithGitHub()}
+            onClick={(e) => auth.signInWithGoogle()}
             variant="ghost"
             size="sm"
             mt={4}

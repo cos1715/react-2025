@@ -45,7 +45,7 @@ export const AddSiteModal: React.FC<IProps> = (props) => {
     try {
       const { id } = await createSite(newSite);
       mutate(
-        '/api/sites',
+        ['/api/sites',auth.user.token],
         async (data) => {
           console.log('mutate==>>', data);
 

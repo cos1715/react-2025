@@ -1,11 +1,11 @@
-import firebase from './firebase-admin';
+import { db } from './firebase-admin';
 import { ECollections } from '@/models';
 import { compareDesc, parseISO } from 'date-fns';
 
 export const getAllFeedback = async (siteId: string) => {
   try {
     const feedbacks = [];
-    const snapshot = await firebase
+    const snapshot = await db
       .collection(ECollections.feedback)
       .where('siteId', '==', siteId)
       .orderBy('createdAt', 'desc')
@@ -26,10 +26,27 @@ export const getAllFeedback = async (siteId: string) => {
   }
 };
 
+export const getAllUserSites = async (uid: string) => {
+  const sites = [];
+  const snapshot = await db
+    .collection(ECollections.sites)
+    .where('authorId', '==', uid)
+    .get();
+
+  snapshot.forEach((doc) =>
+    sites.push({
+      id: doc.id,
+      ...doc.data(),
+    }),
+  );
+
+  return { sites };
+};
+
 export const getAllSites = async () => {
   try {
     const sites = [];
-    const snapshot = await firebase.collection(ECollections.sites).get();
+    const snapshot = await db.collection(ECollections.sites).get();
 
     snapshot.forEach((doc) =>
       sites.push({

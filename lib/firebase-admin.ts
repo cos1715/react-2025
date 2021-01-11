@@ -3,7 +3,6 @@ import 'firebase/auth';
 import 'firebase/functions';
 import 'firebase/firestore';
 
-
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert({
@@ -24,4 +23,5 @@ if (!admin.apps.length) {
 //   }
 // }
 
-export default admin.firestore();
+export const auth = admin.auth();
+export const db = admin.firestore();

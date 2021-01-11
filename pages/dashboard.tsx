@@ -17,8 +17,8 @@ const Container: React.FC<IProps> = ({ data }) => {
 };
 
 export default function Dashboard() {
-  const { data } = useSWR('/api/sites', fetcher);
-  console.log(data);
+  const { user } = useAuth();
+  const { data } = useSWR(user ? ['/api/sites', user.token] : null, fetcher);
 
   return (
     <DashBoardShell>
