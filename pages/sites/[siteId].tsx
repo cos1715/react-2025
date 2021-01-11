@@ -6,7 +6,7 @@ import { IFeedback, ISite } from '@/models';
 import { getAllFeedback, getAllSites } from '@/lib/db-admin';
 import { useAuth } from '@/lib/auth';
 import { createFeedback } from '@/lib/db';
-import { Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/core';
+import { Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import Feedback from '@/components/feedback';
 
 interface IProps extends InferGetStaticPropsType<typeof getStaticProps> {

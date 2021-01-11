@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import cookies from 'js-cookie';
 import { useAuth } from '@/lib/auth';
-import { Heading, Text, Code, Button, Icon, Flex } from '@chakra-ui/core';
+import { Heading, Text, Code, Button, Icon, Flex } from '@chakra-ui/react';
 
 export default function Index() {
   const auth = useAuth();

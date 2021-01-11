@@ -11,7 +11,7 @@ import {
   BreadcrumbLink,
   Heading,
   Button,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 import { AddSiteModal } from '../add-site-modal';
 
 interface IProps {

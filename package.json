@@ -9,13 +9,14 @@
     "fix-formatting": "prettier --write \"**/*.{js,json,md,jsx,ts,tsx,scss}\""
   },
   "dependencies": {
-    "@chakra-ui/core": "^0.8.0",
-    "@emotion/core": "^10.0.35",
-    "@emotion/styled": "^10.0.27",
+    "@chakra-ui/react": "^1.1.4",
+    "@emotion/react": "^11.1.4",
+    "@emotion/styled": "^11.0.0",
     "date-fns": "^2.16.1",
     "emotion-theming": "^10.0.27",
     "firebase": "^7.19.1",
     "firebase-admin": "^9.2.0",
+    "framer-motion": "^3.2.1",
     "js-cookie": "^2.2.1",
     "next": "^10.0.5",
     "prettier": "^2.1.1",
