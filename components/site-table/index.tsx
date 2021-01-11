@@ -28,8 +28,8 @@ export const SiteTable: React.FC<IProps> = ({ sites }) => {
             <Box as="tr" key={site.id}>
               <Td>
                 <NextLink
-                  href="/site/[siteId]"
-                  as={`/site/${site.id}`}
+                  href="/sites/[siteId]"
+                  as={`/sites/${site.id}`}
                   passHref
                 >
                   <Link id={`site-table-link-${index}`} fontWeight="medium">
@@ -44,8 +44,8 @@ export const SiteTable: React.FC<IProps> = ({ sites }) => {
               </Td>
               <Td>
                 <NextLink
-                  href="/site/[siteId]"
-                  as={`/site/${site.id}`}
+                  href="/sites/[siteId]"
+                  as={`/sites/${site.id}`}
                   passHref
                 >
                   <Link color="blue.500" fontWeight="medium">

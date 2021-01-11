@@ -1,9 +1,16 @@
-import { Heading, Text, Code, Button, Box, Flex } from '@chakra-ui/core';
+import { useRouter } from 'next/router';
 import { useAuth } from '@/lib/auth';
-import { Icon } from '@chakra-ui/core';
+import { Heading, Text, Code, Button, Icon, Flex } from '@chakra-ui/core';
+import { useEffect } from 'react';
 
 export default function Index() {
   const auth = useAuth();
+  const router = useRouter();
+  // router.push('/dashboard')
+
+  useEffect(() => {
+    router.push('/dashboard');
+  }, []);
 
   return (
     <>
