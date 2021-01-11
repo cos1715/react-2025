@@ -12,6 +12,7 @@ import {
   Heading,
   Button,
 } from '@chakra-ui/react';
+import { Logo } from '@/components/logo';
 import { AddSiteModal } from '../add-site-modal';
 
 interface IProps {
@@ -31,7 +32,7 @@ export const DashBoardShell: React.FC<IProps> = ({ children }) => {
         px={8}
       >
         <Stack isInline spacing={4} align="center">
-          <Icon name="logo" color="block" size="24px" />
+          <Logo size="24px" color="black" />
           <Link>Feedback</Link>
           <Link>Sites</Link>
         </Stack>

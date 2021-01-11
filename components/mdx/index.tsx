@@ -2,8 +2,8 @@
 import NextLink from 'next/link';
 import {
   Box,
-  Callout,
   Code,
+  Alert,
   Heading,
   Kbd,
   Link,
@@ -79,7 +79,7 @@ const Quote = (props) => {
   };
 
   return (
-    <Callout
+    <Alert
       mt={4}
       w="98%"
       bg={bgColor[colorMode]}
