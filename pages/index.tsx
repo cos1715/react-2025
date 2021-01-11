@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import cookies from 'js-cookie';
 import { useAuth } from '@/lib/auth';
-import { Heading, Text, Code, Button, Icon, Flex } from '@chakra-ui/core';
+import { Heading, Text, Code, Button, Flex } from '@chakra-ui/react';
+import { Logo } from '@/components/logo';
 
 export default function Index() {
   const auth = useAuth();
@@ -24,7 +25,7 @@ export default function Index() {
         w="full"
         h="100vh"
       >
-        <Icon name="logo" size="64px" color="red.500" />
+        <Logo size="64px" color="red.500" />
         <Heading>Fast Feedback</Heading>
         {auth.user ? (
           <>

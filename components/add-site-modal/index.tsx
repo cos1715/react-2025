@@ -18,7 +18,7 @@ import {
   Input,
   ModalFooter,
   useToast,
-} from '@chakra-ui/core';
+} from '@chakra-ui/react';
 
 interface IProps {
   children?: ReactNode;
