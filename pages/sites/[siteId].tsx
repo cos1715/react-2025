@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { IFeedback, ISite } from '@/models';
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
-import { getAllFeedback, getAllSites } from '@/lib/db-admin';
-import Feedback from '@/components/feedback';
-import { Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/core';
-import { useForm } from 'react-hook-form';
-import { useAuth } from '@/lib/auth';
 import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import { IFeedback, ISite } from '@/models';
+import { getAllFeedback, getAllSites } from '@/lib/db-admin';
+import { useAuth } from '@/lib/auth';
 import { createFeedback } from '@/lib/db';
+import { Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
+import Feedback from '@/components/feedback';
 
 interface IProps extends InferGetStaticPropsType<typeof getStaticProps> {
   initialFeedback: IFeedback[];
