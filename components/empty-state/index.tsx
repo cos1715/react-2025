@@ -16,6 +16,6 @@ export const EmptySate = () => (
       You haven't added any sites
     </Heading>
     <Text mb={4}>Welcome 👋 Let's get started</Text>
-    <AddSiteModal buttonProps={{ variantColor: 'teal' }} />
+    <AddSiteModal buttonProps={{ colorScheme: 'teal' }} />
   </Flex>
 );

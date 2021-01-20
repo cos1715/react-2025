@@ -5,6 +5,8 @@ interface IProps {
   children: ReactNode;
   width?: string;
   w?: string;
+  minW?: string;
+  fontWeight?: string;
 }
 
 export const Th: React.FC<IProps> = (props) => (

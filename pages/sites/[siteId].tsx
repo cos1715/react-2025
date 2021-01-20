@@ -31,6 +31,7 @@ export default function SiteFeedback(props: IProps) {
       siteId: `${siteId}`,
       status: 'pending',
       text: values.comment,
+      route: '/',
       createdAt: new Date().toISOString(),
     };
     try {

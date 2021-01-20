@@ -26,6 +26,23 @@ export const getAllFeedback = async (siteId: string) => {
   }
 };
 
+export const getAllUserFeedbacks = async (uid: string) => {
+  const feedbacks = [];
+  const snapshot = await db
+    .collection(ECollections.feedback)
+    .where('authorId', '==', uid)
+    .get();
+
+  snapshot.forEach((doc) =>
+    feedbacks.push({
+      id: doc.id,
+      ...doc.data(),
+    }),
+  );
+
+  return { feedbacks };
+};
+
 export const getAllUserSites = async (uid: string) => {
   const sites = [];
   const snapshot = await db

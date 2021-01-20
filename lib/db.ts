@@ -20,3 +20,11 @@ export function createSite(data) {
 export function createFeedback(data) {
   return fireStore.collection(ECollections.feedback).add(data);
 }
+
+export function updateFeedback(id, data) {
+  return fireStore.collection(ECollections.feedback).doc(id).update(data);
+}
+
+export function deleteFeedback(id) {
+  return fireStore.collection(ECollections.feedback).doc(id).delete();
+}

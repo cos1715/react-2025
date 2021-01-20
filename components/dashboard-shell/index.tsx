@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useAuth } from '@/lib/auth';
 import {
   Flex,
   Icon,
-  Link,
   Stack,
   Avatar,
   Breadcrumb,
@@ -14,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { Logo } from '@/components/logo';
 import { AddSiteModal } from '../add-site-modal';
+import { SiteTableHeader } from '../site-table-header';
 
 interface IProps {
   children: ReactNode;
@@ -21,6 +23,11 @@ interface IProps {
 
 export const DashBoardShell: React.FC<IProps> = ({ children }) => {
   const auth = useAuth();
+  const router = useRouter();
+  const onSignOut = () => {
+    router.push('/');
+    auth.signOut()
+  };
 
   return (
     <Flex flexDirection="column">
@@ -32,15 +39,17 @@ export const DashBoardShell: React.FC<IProps> = ({ children }) => {
         px={8}
       >
         <Stack isInline spacing={4} align="center">
-          <Logo size="24px" color="black" />
-          <Link>Feedback</Link>
-          <Link>Sites</Link>
+          <Link href="/">
+            <Logo size="24px" color="black" />
+          </Link>
+          <Link href="/dashboard">Sites</Link>
+          <Link href="/feedback">Feedback</Link>
         </Stack>
         <Flex alignItems="center">
           {/* <Link mr={4}>Account</Link> */}
           {auth.user && (
-            <Button variant="ghost" mr={4} onClick={auth.signOut}>
-              Log Out
+            <Button variant="ghost" mr={4} onClick={onSignOut}>
+              Sign Out
             </Button>
           )}
           <Avatar size="sm" src={auth.user?.photoURL} />
@@ -55,7 +64,7 @@ export const DashBoardShell: React.FC<IProps> = ({ children }) => {
           mr="auto"
           p="20px"
         >
-          <Breadcrumb addSeparator separator="/">
+          {/* <Breadcrumb addSeparator separator="/">
             <BreadcrumbItem isCurrentPage>
               <BreadcrumbLink color="gray.700" fontSize="sm">
                 Sites
@@ -66,9 +75,9 @@ export const DashBoardShell: React.FC<IProps> = ({ children }) => {
           <Flex justifyContent="space-between">
             <Heading mb={8}>My Sites</Heading>
             <AddSiteModal
-              buttonProps={{ text: '+ Add Site', variantColor: 'teal' }}
+              buttonProps={{ text: '+ Add Site', colorScheme: 'teal' }}
             />
-          </Flex>
+          </Flex> */}
           {children}
         </Flex>
       </Flex>

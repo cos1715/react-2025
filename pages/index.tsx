@@ -10,10 +10,10 @@ export default function Index() {
   const router = useRouter();
 
   useEffect(() => {
-    if (document.cookie && cookies.get('auth-token')) {
+    if ((auth.user || document.cookie) && cookies.get('auth-token')) {
       router.push('/dashboard');
     }
-  }, []);
+  }, [auth.user]);
 
   return (
     <>
@@ -32,19 +32,29 @@ export default function Index() {
             <Text>
               Email: <Code>{auth.user.email}</Code>
             </Text>
-            <Button onClick={(e) => auth.signOut()} variantColor="green">
+            <Button onClick={(e) => auth.signOut()} colorScheme="green">
               Sign Out
             </Button>
           </>
         ) : (
-          <Button
-            onClick={(e) => auth.signInWithGoogle()}
-            variant="ghost"
-            size="sm"
-            mt={4}
-          >
-            Sign In
-          </Button>
+          <>
+            <Button
+              onClick={(e) => auth.signInWithGoogle()}
+              size="sm"
+              colorScheme="teal"
+              mt={4}
+            >
+              Sign In With Google
+            </Button>
+            <Button
+              onClick={(e) => auth.signInWithGitHub()}
+              size="sm"
+              colorScheme="facebook"
+              mt={4}
+            >
+              Sign In With Github
+            </Button>
+          </>
         )}
       </Flex>
     </>

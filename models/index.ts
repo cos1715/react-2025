@@ -31,4 +31,5 @@ export interface IFeedback {
   status: string;
   text: string;
   createdAt: string;
+  route?: string;
 }

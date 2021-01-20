@@ -23,7 +23,7 @@ import {
 interface IProps {
   children?: ReactNode;
   buttonProps?: {
-    variantColor?: string;
+    colorScheme?: string;
     text?: string;
   };
 }
@@ -80,7 +80,7 @@ export const AddSiteModal: React.FC<IProps> = (props) => {
         onClick={onOpen}
         maxW="200px"
         fontWeight="medium"
-        variantColor={props.buttonProps.variantColor}
+        colorScheme={props.buttonProps.colorScheme}
       >
         {props.buttonProps.text || 'Add your first site'}
       </Button>
@@ -118,7 +118,7 @@ export const AddSiteModal: React.FC<IProps> = (props) => {
               <Button
                 isDisabled={!formState.isValid}
                 type="submit"
-                variantColor="teal"
+                colorScheme="teal"
               >
                 Save
               </Button>
