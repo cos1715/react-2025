@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
+import { useRouter } from 'next/router';
 import cookies from 'js-cookie';
 import firebase from './firebase';
 import { createUser } from './db';
@@ -34,6 +35,7 @@ export const useAuth = () => useContext(authContext);
 function useProvideAuth(): IAuth {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
   const handleUser = (rawUser) => {
     if (rawUser) {
       console.log('rawUser==>>', rawUser);
@@ -60,11 +62,7 @@ function useProvideAuth(): IAuth {
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then((response) => {
         handleUser(response.user);
-        console.log('redirect==>>', redirect);
-
-        // if (redirect) {
-        //   Router.push(redirect);
-        // }
+        redirect && router.push(redirect);
       });
   };
   const signInWithGitHub = (redirect) => {
@@ -75,11 +73,7 @@ function useProvideAuth(): IAuth {
       .signInWithPopup(new firebase.auth.GithubAuthProvider())
       .then((response) => {
         handleUser(response.user);
-        console.log('redirect==>>', redirect);
-
-        // if (redirect) {
-        //   Router.push(redirect);
-        // }
+        redirect && router.push(redirect);
       });
   };
   const signOut = () =>

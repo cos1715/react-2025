@@ -80,7 +80,7 @@ export const AddSiteModal: React.FC<IProps> = (props) => {
         onClick={onOpen}
         maxW="200px"
         fontWeight="medium"
-        colorScheme={props.buttonProps.colorScheme}
+        colorScheme={props?.buttonProps?.colorScheme}
       >
         {props.buttonProps.text || 'Add your first site'}
       </Button>

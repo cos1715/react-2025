@@ -24,9 +24,9 @@ interface IProps {
 export const DashBoardShell: React.FC<IProps> = ({ children }) => {
   const auth = useAuth();
   const router = useRouter();
-  const onSignOut = () => {
+  const onSignOut = async () => {
+    await auth.signOut();
     router.push('/');
-    auth.signOut()
   };
 
   return (
